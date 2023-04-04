@@ -1,0 +1,24 @@
+{
+	"posts": [
+		{
+			"title": "Сегодня хорошая погода",
+			"img": "static/img/i.jpeg",
+			"likes": 3
+		},
+		{
+			"title": "Завтра хорошая погода",
+			"img": "static/img/i.jpeg",
+			"likes": 4
+		},
+		{
+			"title": "Послезавтра дождь",
+			"img": "static/img/i.jpeg",
+			"likes": 1
+		},
+		{
+			"title": "Цветочек",
+			"img": "static/img/img.png",
+			"likes": 6666
+		}
+	]
+}
