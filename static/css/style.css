@@ -17,3 +17,7 @@ body {
 .footer {
 	flex: 0 0 auto;
 }
+
+.container{
+	padding: 10;
+}
