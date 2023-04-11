@@ -17,14 +17,37 @@ login_manager.init_app(app)
 
 db_session.global_init("db/website.db")
 
+
 @app.route("/", methods=['GET'])
 @app.route("/main", methods=['GET'])
 @app.route("/index", methods=['GET'])
 def index():
-    with open('posts.json') as json_file:
-        data = json.load(json_file)
+    posts_list = {
+        "posts": [
+            {
+                "title": "Сегодня хорошая погода",
+                "img": "static/img/i.jpeg",
+                "likes": 3
+            },
+            {
+                "title": "Завтра хорошая погода",
+                "img": "static/img/i.jpeg",
+                "likes": 4
+            },
+            {
+                "title": "Послезавтра дождь",
+                "img": "static/img/i.jpeg",
+                "likes": 1
+            },
+            {
+                "title": "Цветочек",
+                "img": "static/img/img.png",
+                "likes": 6666
+            }
+        ]
+    }
 
-    return render_template("index.html", posts=data)
+    return render_template("index.html", posts=posts_list)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -55,6 +78,7 @@ def reqister():
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -70,6 +94,7 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
 
 @app.route("/profile", methods=['GET', "POST"])
 def profile():
@@ -109,10 +134,12 @@ def profile():
     else:
         return redirect("/login")
 
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
+
 
 @app.route('/logout')
 @login_required
